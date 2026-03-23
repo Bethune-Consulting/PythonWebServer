@@ -18,7 +18,7 @@ class HelloWorldHandler(SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
-            self.wfile.write(b'{"version":"1.0.0"}')
+            self.wfile.write(b'{"version":"1.0.1"}')
 
         elif self.path.startswith('/echo'):
             from urllib.parse import urlparse, parse_qs
