@@ -31,6 +31,18 @@ class HelloWorldHandler(SimpleHTTPRequestHandler):
             import json
             self.wfile.write(json.dumps(query).encode())
 
+        elif self.path.startswith('/status/'):
+            try:
+                code = int(self.path.split('/')[-1])
+                self.send_response(code)
+                self.send_header('Content-type', 'text/plain')
+                self.end_headers()
+                self.wfile.write(f"Status: {code}".encode())
+
+            except ValueError:
+                self.send_response(400)
+                self.end_headers()
+
         else:
             super().do_GET()
 
