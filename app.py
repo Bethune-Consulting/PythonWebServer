@@ -20,6 +20,12 @@ class HelloWorldHandler(SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b'{"version":"1.0.0"}')
 
+        elif self.path == '/ninchi':
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            self.wfile.write(b'{"message":"Ninchi check passed"}')
+
         elif self.path.startswith('/echo'):
             from urllib.parse import urlparse, parse_qs
             parsed = urlparse(self.path)
@@ -50,3 +56,4 @@ class HelloWorldHandler(SimpleHTTPRequestHandler):
             self.end_headers()
 
 HTTPServer(("", 8080), HelloWorldHandler).serve_forever()
+
